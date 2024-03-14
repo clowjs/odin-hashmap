@@ -1,5 +1,3 @@
-const LinkedList = require('./linkedList');
-
 class HashMap {
   constructor(capacity, loadFactor) {
     this._map = [];
@@ -25,10 +23,33 @@ class HashMap {
 
   // set(key, value) takes two arguments, the first is a key and the second is a value that is assigned to this key.
   // If a key already exists, then the old value is overwritten or we can say that we update the key’s value
-  set(key, value) {}
+  set(key, value) {
+    const hashCode = this.hash(key);
+
+    if (!this._map[hashCode]) {
+      this._map[hashCode] = [[key, value]];
+      return;
+    }
+
+    let filteredNode = this._map[hashCode].filter((node) => node[0] !== key);
+
+    this._map[hashCode] = [...filteredNode, [key, value]]
+  }
 
   // get(key) takes one argument as a key and returns the value that is assigned to this key. If a key is not found, return null.
-  get(key) {}
+  get(key) {
+    const hashCode = this.hash(key);
+    const list = this._map[hashCode];
+
+    if (!list) return null;
+
+    const filteredNode = list.find((node) => node[0] === key);
+
+    if (!filteredNode) return null;
+
+    return filteredNode[1];
+
+  }
 
   // has(key) takes a key as an argument and returns true or false based on whether or not the key is in the hash map.
   has(key) {}
@@ -54,5 +75,17 @@ class HashMap {
   // Extra Credit
   // Create a class HashSet that behaves the same as a HashMap but only contains keys with no values.
 }
+
+const map = new HashMap(16, 0.75);
+console.log(map);
+
+map.set('Sergio', 35);
+
+console.log(map);
+console.log(map._map[13])
+
+map.set('Sergio', 40);
+map.set('Jose', 30)
+console.log(map.get('Felipe'));
 
 module.exports = HashMap;
