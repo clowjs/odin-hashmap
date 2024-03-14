@@ -139,7 +139,19 @@ class HashMap {
   }
 
   // entries() returns an array that contains each key, value pair. Example: [[firstKey, firstValue], [secondKey, secondValue]]
-  entries() {}
+  entries() {
+    if (this.length() === 0) return [];
+
+    let entries = [];
+
+    for (let i = 0; i < this._map.length; i++) {
+      const list = this._map[i];
+
+      if (list) entries = [...entries, ...list]
+    }
+
+    return entries;
+  }
 
   // Extra Credit
   // Create a class HashSet that behaves the same as a HashMap but only contains keys with no values.
@@ -157,5 +169,6 @@ map.set('Rose', 55);
 console.log(map.length());
 console.log(map.keys());
 console.log(map.values());
+console.log(map.entries());
 
 module.exports = HashMap;
