@@ -53,25 +53,33 @@ class HashMap {
 
   // has(key) takes a key as an argument and returns true or false based on whether or not the key is in the hash map.
   has(key) {
-    if (this.length() === 0) return false;
+    if (this._map.length === 0) return false;
 
+    const hashCode = this.hash(key);
+    const list = this._map[hashCode];
+    if (!list) return false;
+    if (list.length === 0) return false;
+    
     let found = false;
 
-    this._map.forEach((hash) => {
-      if (hash.length > 0) {
-        hash.forEach((node) => {
-          if (node[0] === key) {
-            found = true;
-          }
-        })
-      }      
+    list.forEach((node) => {
+      if (node[0] === key) found = true;
     })
 
     return found;
   }
 
   // remove(key) takes a key as an argument. If the given key is in the hash map, it should remove the entry with that key and return true. If the key isn’t in the hash map, it should return false.
-  remove(key) {}
+  remove(key) {
+    if (!this.has(key)) return false;
+
+    const hashCode = this.hash(key);
+    let filteredList = this._map[hashCode].filter((node) => node[0] !== key);
+
+    this._map[hashCode] = filteredList;
+
+    return true
+  }
 
   // length() returns the number of stored keys in the hash map.
   length() {}
@@ -104,5 +112,11 @@ map.set('Sergio', 40);
 map.set('Jose', 30)
 console.log(map.has('Sergio'));
 console.log(map.has('Felipe'));
+
+console.log(map.has('Sergio'));
+console.log(map.remove('Sergio'));
+console.log(map.has('Sergio'));
+console.log(map);
+
 
 module.exports = HashMap;
