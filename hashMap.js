@@ -52,7 +52,23 @@ class HashMap {
   }
 
   // has(key) takes a key as an argument and returns true or false based on whether or not the key is in the hash map.
-  has(key) {}
+  has(key) {
+    if (this.length() === 0) return false;
+
+    let found = false;
+
+    this._map.forEach((hash) => {
+      if (hash.length > 0) {
+        hash.forEach((node) => {
+          if (node[0] === key) {
+            found = true;
+          }
+        })
+      }      
+    })
+
+    return found;
+  }
 
   // remove(key) takes a key as an argument. If the given key is in the hash map, it should remove the entry with that key and return true. If the key isn’t in the hash map, it should return false.
   remove(key) {}
@@ -86,6 +102,7 @@ console.log(map._map[13])
 
 map.set('Sergio', 40);
 map.set('Jose', 30)
-console.log(map.get('Felipe'));
+console.log(map.has('Sergio'));
+console.log(map.has('Felipe'));
 
 module.exports = HashMap;
