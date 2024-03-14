@@ -101,7 +101,23 @@ class HashMap {
   }
 
   // keys() returns an array containing all the keys inside the hash map.
-  keys() {}
+  keys() {
+    if (this.length() === 0) return [];
+
+    let keys = [];
+
+    for (let i = 0; i < this._map.length; i++) {
+      const list = this._map[i];
+      
+      if (list) {
+        for (let j = 0; j < list.length; j++) {
+          keys.push(list[j][0]);
+        }
+      }
+    }
+
+    return keys;
+  }
 
   // values() returns an array containing all the values.
   values() {}
@@ -123,9 +139,6 @@ map.set('Gabrielle', 45);
 map.set('Rose', 55);
 
 console.log(map.length());
-map.remove('Sergio');
-console.log(map.length());
-map.clear();
-console.log(map);
+console.log(map.keys());
 
 module.exports = HashMap;
