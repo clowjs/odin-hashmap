@@ -96,7 +96,9 @@ class HashMap {
   }
 
   // clear() removes all entries in the hash map.
-  clear() {}
+  clear() {
+    this._map = [];
+  }
 
   // keys() returns an array containing all the keys inside the hash map.
   keys() {}
@@ -118,10 +120,12 @@ map.set('Sergio', 35);
 map.set('Mario', 15);
 map.set('Nathan', 25);
 map.set('Gabrielle', 45);
-map.set('rose', 55);
+map.set('Rose', 55);
 
 console.log(map.length());
 map.remove('Sergio');
 console.log(map.length());
+map.clear();
+console.log(map);
 
 module.exports = HashMap;
