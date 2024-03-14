@@ -120,7 +120,23 @@ class HashMap {
   }
 
   // values() returns an array containing all the values.
-  values() {}
+  values() {
+    if (this.length() === 0) return [];
+
+    let values = [];
+
+    for (let i = 0; i < this._map.length; i++) {
+      const list = this._map[i];
+      
+      if (list) {
+        for (let j = 0; j < list.length; j++) {
+          values.push(list[j][1]);
+        }
+      }
+    }
+
+    return values;
+  }
 
   // entries() returns an array that contains each key, value pair. Example: [[firstKey, firstValue], [secondKey, secondValue]]
   entries() {}
@@ -140,5 +156,6 @@ map.set('Rose', 55);
 
 console.log(map.length());
 console.log(map.keys());
+console.log(map.values());
 
 module.exports = HashMap;
