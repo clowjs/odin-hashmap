@@ -82,7 +82,18 @@ class HashMap {
   }
 
   // length() returns the number of stored keys in the hash map.
-  length() {}
+  length() {
+    if (this._map.length === 0) return 0;
+
+    let count = 0;
+
+    for (let i = 0; i < this._map.length; i++) {
+      const list = this._map[i];
+      if (list) count += list.length;      
+    }
+
+    return count;
+  }
 
   // clear() removes all entries in the hash map.
   clear() {}
@@ -104,19 +115,13 @@ const map = new HashMap(16, 0.75);
 console.log(map);
 
 map.set('Sergio', 35);
+map.set('Mario', 15);
+map.set('Nathan', 25);
+map.set('Gabrielle', 45);
+map.set('rose', 55);
 
-console.log(map);
-console.log(map._map[13])
-
-map.set('Sergio', 40);
-map.set('Jose', 30)
-console.log(map.has('Sergio'));
-console.log(map.has('Felipe'));
-
-console.log(map.has('Sergio'));
-console.log(map.remove('Sergio'));
-console.log(map.has('Sergio'));
-console.log(map);
-
+console.log(map.length());
+map.remove('Sergio');
+console.log(map.length());
 
 module.exports = HashMap;
